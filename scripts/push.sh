@@ -37,15 +37,14 @@ do_push() {
 }
 
 # When building on Travis, login if credentials are provided, bail otherwise as it's probably a fork
-#if [ -n "${TRAVIS+x}" ] && [ "${TRAVIS}" == "true" ] ; then
-#  if [ -n "${DOCKER_EMAIL+x}" ] && [ -n "${DOCKER_USER+x}" ] && [ -n "${DOCKER_PASS+x}" ] ; then
-#    docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-#  else
-#    exit
-#  fi
-#fi
+if [ -n "${TRAVIS+x}" ] && [ "${TRAVIS}" == "true" ] ; then
+  if [ -n "${DOCKER_EMAIL+x}" ] && [ -n "${DOCKER_USER+x}" ] && [ -n "${DOCKER_PASS+x}" ] ; then
+    docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
+  else
+    exit
+  fi
+fi
 
-docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
 for image in $(get_image_tags) ; do
   do_push "${image}"
 done
