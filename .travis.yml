@@ -4,7 +4,7 @@ services:
 install: true
 
 env:
-  - IMAGE_ORG=haroldmei
+  - IMAGE_ORG=haroldmei TRAVIS_TAG=latest
 
 script:
   - make
