@@ -22,3 +22,4 @@ build: Boxfile
 
 push:
 	@./scripts/push.sh
+
